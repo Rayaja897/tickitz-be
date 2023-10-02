@@ -86,7 +86,7 @@ app.post("/movies", async (req, res) => {
     (${name}, ${release_date}, ${duration}, ${genres}, ${directed_by}, ${casts}, ${synopsis}, ${poster}) RETURNING id`
 
     if (request.length > 0) {
-      res.json({
+      res.status(201).json({
         status: true,
         message: "Insert Data Success",
       })
@@ -177,7 +177,7 @@ app.post("/cinemas", async (req, res) => {
     values
     (${movie_id}, ${name}, ${city}, ${addres}, ${show_times}, ${price}, ${logo}) RETURNING id`
     if (request.length > 0) {
-      res.json({
+      res.status(201).json({
         status: true,
         message: "Insert Data Success",
       })
@@ -193,8 +193,8 @@ app.post("/cinemas", async (req, res) => {
   }
 })
 
-//ENDPOINT MOVIES
-//Show all movies
+//ENDPOINT USERS
+//Show all users
 app.get('/users', async (req, res) => {
   try {
     const request = await database`SELECT first_name, last_name, phone_number, email, photo_profile FROM users`;
@@ -213,7 +213,7 @@ app.get('/users', async (req, res) => {
   }
 })
 
-//Show selected movies
+//Show selected users
 app.get('/users/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -266,7 +266,7 @@ app.post("/users", async (req, res) => {
     (${first_name}, ${last_name}, ${phone_number}, ${email}, ${password}, ${photo_profile}) RETURNING id`
 
     if (request.length > 0) {
-      res.json({
+      res.status(201).json({
         status: true,
         message: "Insert Data Success",
       })
