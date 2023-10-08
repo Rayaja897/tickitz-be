@@ -1,256 +1,26 @@
-
-const database = require("../database")
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken');
 const router = require("express").Router();
+const usersController = require("../controllers/users");
 
 //MIDDLEWARE FUNCTION
-const checkJwt = async (req, res, next) => {
-    try {
-      const token = req.headers.authorization.slice(7);
-      const decoded = jwt.verify(token, process.env.SECRET_TOKEN);
-  
-      if (decoded) {
-        next();
-      }else{
-        res.status(401).json({
-          status: false,
-          message: "Token error",
-          data: [],
-        })
-      }
-  
-    } catch (error) {
-      res.status(401).json({
-        status: false,
-        message: "Token error",
-        data: [],
-      })
-    }
-  }
+const checkJwt = usersController._checkJwt
 
 //ENDPOINT USERS
 //Show all users
-router.get('/users', async (req, res) => {
-    try {
-      const request = await database`SELECT first_name, last_name, phone_number, photo_profile FROM users`;
-  
-      res.json({
-        status: true,
-        message: "Get Data Success",
-        data: request,
-      })
-    } catch (error) {
-      res.status(502).json({
-        status: false,
-        message: "Something Wrong on our server",
-        data: [],
-      })
-    }
-  })
+router.get('/users', usersController._getAllUsers)
   
   //Register User
-  router.post('/users/register', async (req, res) => {
-    try {
-      const {
-        first_name,
-        last_name,
-        phone_number,
-        email,
-        password,
-        photo_profile
-      } = req.body;
-  
-      const isInputValid =
-        first_name &&
-        last_name &&
-        phone_number &&
-        email &&
-        password &&
-        photo_profile;
-  
-      //check if input is valid
-      if (!isInputValid) {
-        res.status(400).json({
-          status: false,
-          message: "Bad input, please make sure your input is completed",
-        })
-        return
-      }
-  
-      //check unique email
-      const checkEmail = await database`SELECT * FROM users WHERE email = ${email}`;
-  
-      if (checkEmail.length > 0) {
-        res.status(400).json({
-          status: false,
-          message: "Email is already registered",
-        })
-        return
-      }
-  
-      const saltRounds = 15;
-      const salt = bcrypt.genSaltSync(saltRounds);
-      const hash = bcrypt.hashSync(password, salt);
-  
-      const request = await database`INSERT INTO users
-        (first_name, last_name, phone_number, email, password, photo_profile)
-      values
-        (${first_name}, ${last_name}, ${phone_number}, ${email}, ${hash}, ${photo_profile}) RETURNING id`
-  
-      if (request.length > 0) {
-        res.status(201).json({
-          status: true,
-          message: "Insert Data Success",
-        })
-      }
-  
-    } catch (error) {
-      res.status(502).json({
-        status: false,
-        message: "Something Wrong on our server",
-        data: [],
-      })
-    }
-  })
+  router.post('/users/register', usersController._inputValidation, usersController._registUser)
   
   //Login User
-  router.post('/users/login', async (req, res) => {
-    try {
-      const {email, password} = req.body
-  
-      //check if email registered
-      const checkEmail = await database`SELECT * FROM users WHERE email = ${email}`;
-  
-      if (checkEmail.length == 0) {
-        res.status(400).json({
-          status: false,
-          message: "Email is not registered",
-        })
-        return
-      }
-  
-      //check if password correct
-      const isMatch = bcrypt.compareSync(password, checkEmail[0].password);
-      
-      if (isMatch) {
-        const token = jwt.sign(checkEmail[0], process.env.SECRET_TOKEN)
-  
-        res.json({
-          status: true,
-          message: "Login Success",
-          accessToken: token,
-          data: checkEmail,
-        })
-      }else{
-        res.status(400).json({
-          status: false,
-          message: "Password inccorect",
-        })
-      }
-  
-    } catch (error) {
-      res.status(502).json({
-        status: false,
-        message: "Something Wrong on our server",
-        data: [],
-      })
-    }
-  })
+  router.post('/users/login', usersController._loginUser)
   
   //Profile User
-  router.get('/users/me', checkJwt, async (req, res) => {
-    try {
-      const token = req.headers.authorization.slice(7);
-      const decoded = jwt.verify(token, process.env.SECRET_TOKEN);
-  
-      const request = await database`SELECT * FROM users WHERE id = ${decoded.id}`
-  
-      res.json({
-        status: true,
-        message: "Get data Success",
-        data: request,
-      })
-    } catch (error) {
-      res.status(502).json({
-        status: false,
-        message: "Something wrong in our server",
-        data: []
-      })
-    }
-  })
+  router.get('/users/me', checkJwt, usersController._profileUser)
   
   //Edit User
-  router.put('/users/edit', checkJwt, async (req, res) => {
-    try {
-      const token = req.headers.authorization.slice(7);
-      const decoded = jwt.verify(token, process.env.SECRET_TOKEN);
-      const { id } = decoded;
+  router.put('/users/edit', checkJwt, usersController._inputValidationProf, usersController._editUser)
   
-      const coloumns = [
-        "first_name",
-        "last_name",
-        "phone_number",
-        "email",
-        "photo_profile",
-      ];
-  
-      const request = await database`
-      UPDATE users SET ${database(
-        req.body,
-        coloumns
-      )} WHERE id = ${id} RETURNING id`
-  
-      if (request.length > 0) {
-        res.json({
-          status: true,
-          message: "Update data success",
-        })
-      }
-  
-    } catch (error) {
-      res.status(502).json({
-        status: false,
-        message: "Something wrong in our server",
-        data: []
-      })
-    }
-  })
-  
-  router.put('/users/edit/password', checkJwt, async (req, res) => {
-    try {
-      const token = req.headers.authorization.slice(7);
-      const decoded = jwt.verify(token, process.env.SECRET_TOKEN);
-      const { id } = decoded;
-  
-      const coloumns = [
-        "password",
-      ];
-      
-      const saltRounds = 15;
-      const salt = bcrypt.genSaltSync(saltRounds);
-      const hash = bcrypt.hashSync(req.body.password, salt);
-  
-      const request = await database`
-      UPDATE users SET ${database(
-        {password : hash},
-        coloumns
-      )} WHERE id = ${id} RETURNING id`
-  
-      if (request.length > 0) {
-        res.json({
-          status: true,
-          message: "Update data success",
-        })
-      }
-      
-    } catch (error) {
-      res.status(502).json({
-        status: false,
-        message: "Something wrong in our server",
-        data: []
-      })
-    }
-  })
+  //Edit Password User
+  router.put('/users/edit/password', checkJwt, usersController._inputValidationPass, usersController._editPass)
 
   module.exports = router;
