@@ -1,0 +1,394 @@
+{
+	"info": {
+		"_postman_id": "98c5629b-608d-4adc-a694-4e7d5bf70f0a",
+		"name": "Tickitz API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30077645"
+	},
+	"item": [
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "List Movies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail Movie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/movies/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Movie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test 6\",\r\n    \"release_date\":\"2020-01-02\",\r\n    \"duration\":\"3 hours\",\r\n    \"genres\":[\"Comedy\",\"Fantasy\"],\r\n    \"directed_by\":\"Nikola Tesla\",\r\n    \"casts\":[\"Rayhan\",\"indra\",\"nopal\"],\r\n    \"synopsis\":\"suatu hari rayhan dan temannya push rank mobile legends\",\r\n    \"poster\":\"https://cdn.wallpapersafari.com/27/56/uZ4z6d.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Movie",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"ini film di edit\",\r\n    \"release_date\":\"2020-01-02\",\r\n    \"duration\":\"3 hours\",\r\n    \"genres\":[\"Comedy\",\"Fantasy\"],\r\n    \"directed_by\":\"Nikola Tesla\",\r\n    \"casts\":[\"Rayhan\",\"indra\",\"nopal\"],\r\n    \"synopsis\":\"suatu hari rayhan dan temannya push rank mobile legends\",\r\n    \"poster\":\"https://cdn.wallpapersafari.com/27/56/uZ4z6d.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/movies/22",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Movie",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/movies/22",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								"22"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cinemas",
+			"item": [
+				{
+					"name": "Get All Cinemas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/cinemas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cinemas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Selected Cinemas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/cinemas/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cinemas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Data Cinemas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"movie_id\": 7,\r\n    \"name\": \"CGV Cinemas Paris van Java\",\r\n    \"city\": \"Bandung\",\r\n    \"addres\": \"Jl. Sukajadi No. 137-139 Kota Bandung\",\r\n    \"show_times\": [\"10.45am\", \"01.00pm\", \"03.15pm\"],\r\n    \"price\": 15,\r\n    \"logo\": \"https://4.bp.blogspot.com/-rbQNzCVzyTc/WqIg6JwbgTI/AAAAAAAAINA/43qAdN2h6OcgTWF7qVjv08zuGunYpDlCgCLcBGAs/s1600/cgv.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/cinemas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"cinemas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "List Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detail Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0X25hbWUiOiJNYWRhcmEiLCJsYXN0X25hbWUiOiJVY2hpaGEiLCJwaG9uZV9udW1iZXIiOiIwODk3ODMzNTU1MiIsImVtYWlsIjoibWFkYXJhZ2F1bEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxNSRDODFPZnNWazJYS2JQVWFDYW5PLlZPaVJ5d0U0MHk4Rm93VXdoOTlzY3I5d0J4NDNzNi5kaSIsInBob3RvX3Byb2ZpbGUiOiJodHRwczovL3BuZy5wbmd0cmVlLmNvbS9lbGVtZW50X291ci9wbmdfZGV0YWlsLzIwMTgxMTAyL2F2YXRhci1wcm9maWxlLWxvZ28tdmVjdG9yLWVtYmxlbS1pbGx1c3RyYXRpb24tbW9kZXJuLWlsbHVzdHJhdGlvbi1wbmdfMjI3NDg1LmpwZyIsImlhdCI6MTY5NjgyMzgyNn0.msyTYVhehUDV9R-rd4sbCPGrN4mktBei3uWrqe6vrbE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Madara\",\r\n    \"last_name\": \"Uchiha\",\r\n    \"phone_number\": \"08978335552\",\r\n    \"email\": \"madaragaul\",\r\n    \"password\": \"iniPasswordMadara\",\r\n    \"photo_profile\": \"https://png.pngtree.com/element_our/png_detail/20181102/avatar-profile-logo-vector-emblem-illustration-modern-illustration-png_227485.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"shisuigaul@gmail.com\",\r\n    \"password\": \"iniPasswordShisui\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0X25hbWUiOiJNYWRhcmEiLCJsYXN0X25hbWUiOiJVY2hpaGEiLCJwaG9uZV9udW1iZXIiOiIwODk3ODMzNTU1MiIsImVtYWlsIjoibWFkYXJhZ2F1bEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxNSRDODFPZnNWazJYS2JQVWFDYW5PLlZPaVJ5d0U0MHk4Rm93VXdoOTlzY3I5d0J4NDNzNi5kaSIsInBob3RvX3Byb2ZpbGUiOiJodHRwczovL3BuZy5wbmd0cmVlLmNvbS9lbGVtZW50X291ci9wbmdfZGV0YWlsLzIwMTgxMTAyL2F2YXRhci1wcm9maWxlLWxvZ28tdmVjdG9yLWVtYmxlbS1pbGx1c3RyYXRpb24tbW9kZXJuLWlsbHVzdHJhdGlvbi1wbmdfMjI3NDg1LmpwZyIsImlhdCI6MTY5NjgyMzgyNn0.msyTYVhehUDV9R-rd4sbCPGrN4mktBei3uWrqe6vrbE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Shisui\",\r\n    \"last_name\": \"Uchiha\",\r\n    \"phone_number\": \"08978335552\",\r\n    \"email\": \"shisuigaul@gmail.com\",\r\n    \"photo_profile\": \"https://png.pngtree.com/element_our/png_detail/20181102/avatar-profile-logo-vector-emblem-illustration-modern-illustration-png_227485.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/edit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Password User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImZpcnN0X25hbWUiOiJNYWRhcmEiLCJsYXN0X25hbWUiOiJVY2hpaGEiLCJwaG9uZV9udW1iZXIiOiIwODk3ODMzNTU1MiIsImVtYWlsIjoibWFkYXJhZ2F1bEBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxNSRDODFPZnNWazJYS2JQVWFDYW5PLlZPaVJ5d0U0MHk4Rm93VXdoOTlzY3I5d0J4NDNzNi5kaSIsInBob3RvX3Byb2ZpbGUiOiJodHRwczovL3BuZy5wbmd0cmVlLmNvbS9lbGVtZW50X291ci9wbmdfZGV0YWlsLzIwMTgxMTAyL2F2YXRhci1wcm9maWxlLWxvZ28tdmVjdG9yLWVtYmxlbS1pbGx1c3RyYXRpb24tbW9kZXJuLWlsbHVzdHJhdGlvbi1wbmdfMjI3NDg1LmpwZyIsImlhdCI6MTY5NjgyMzgyNn0.msyTYVhehUDV9R-rd4sbCPGrN4mktBei3uWrqe6vrbE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"iniPasswordShisui\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/edit/password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"edit",
+								"password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
