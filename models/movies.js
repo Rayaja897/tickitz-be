@@ -31,11 +31,11 @@ const modelMovies = {
     editMovie: async (reqBody, coloumns, id) => {
         const request = await database`
       UPDATE movies SET ${database(
-        reqBody,
-        coloumns
-      )} WHERE id = ${id} RETURNING id`
+            reqBody,
+            coloumns
+        )} WHERE id = ${id} RETURNING id`
 
-      return request;
+        return request;
     },
     deleteMovie: async (id) => {
         const request = await database`DELETE FROM movies WHERE id = ${id}`;
