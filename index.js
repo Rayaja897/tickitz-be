@@ -6,8 +6,8 @@ const cors = require('cors')
 const helmet = require('helmet')
 
 //import router
-const moviesRouter = require('./routers/movies')
-const usersRouter = require('./routers/users')
+const moviesRouter = require('./src/routers/movies')
+const usersRouter = require('./src/routers/users')
 
 //grand access for express can accept input from outside
 app.use(express.urlencoded({ extended: false }))
